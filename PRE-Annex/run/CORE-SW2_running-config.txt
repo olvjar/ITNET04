@@ -1,0 +1,336 @@
+!
+version 16.3.2
+service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname CORE-SW2
+!
+login block-for 60 attempts 3 within 60
+!
+no profinet
+enable secret 5 $1$mERr$q1ERvUpcoRyivE2selkkM.
+!
+!
+!
+!
+!
+!
+no ip cef
+ip routing
+!
+no ipv6 cef
+!
+!
+!
+username netadmin2 password 7 080F1F5A481E2D4F575C36141826
+!
+!
+!
+!
+!
+!
+!
+!
+ip arp inspection vlan 10,20,30,40,50,60,99
+!
+ip dhcp snooping vlan 10,20,30,40,50,60,99
+ip dhcp snooping
+!
+ip domain-name aitc.local
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree vlan 30,40,99 priority 4096
+spanning-tree vlan 10,20,50,60 priority 8192
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface GigabitEthernet1/0/1
+ ip dhcp snooping trust
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+!
+interface GigabitEthernet1/0/2
+ ip dhcp snooping trust
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+!
+interface GigabitEthernet1/0/3
+ ip dhcp snooping trust
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+!
+interface GigabitEthernet1/0/4
+ ip dhcp snooping trust
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+!
+interface GigabitEthernet1/0/5
+ ip dhcp snooping trust
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+!
+interface GigabitEthernet1/0/6
+ ip dhcp snooping trust
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+!
+interface GigabitEthernet1/0/7
+ ip dhcp snooping trust
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+!
+interface GigabitEthernet1/0/8
+ ip dhcp snooping trust
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+!
+interface GigabitEthernet1/0/9
+ ip dhcp snooping trust
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+!
+interface GigabitEthernet1/0/10
+ ip dhcp snooping trust
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+!
+interface GigabitEthernet1/0/11
+ switchport access vlan 199
+ shutdown
+!
+interface GigabitEthernet1/0/12
+ switchport access vlan 199
+ shutdown
+!
+interface GigabitEthernet1/0/13
+ switchport access vlan 199
+ shutdown
+!
+interface GigabitEthernet1/0/14
+ switchport access vlan 199
+ shutdown
+!
+interface GigabitEthernet1/0/15
+ switchport access vlan 199
+ shutdown
+!
+interface GigabitEthernet1/0/16
+ switchport access vlan 199
+ shutdown
+!
+interface GigabitEthernet1/0/17
+ switchport access vlan 199
+ shutdown
+!
+interface GigabitEthernet1/0/18
+ switchport access vlan 199
+ shutdown
+!
+interface GigabitEthernet1/0/19
+ switchport access vlan 199
+ shutdown
+!
+interface GigabitEthernet1/0/20
+ ip dhcp snooping trust
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+ channel-group 1 mode active
+!
+interface GigabitEthernet1/0/21
+ ip dhcp snooping trust
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+ channel-group 1 mode active
+!
+interface GigabitEthernet1/0/22
+ switchport access vlan 199
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface GigabitEthernet1/0/23
+ switchport access vlan 199
+ shutdown
+!
+interface GigabitEthernet1/0/24
+ switchport access vlan 199
+ shutdown
+!
+interface GigabitEthernet1/1/1
+ switchport access vlan 199
+ shutdown
+!
+interface GigabitEthernet1/1/2
+ switchport access vlan 199
+ shutdown
+!
+interface GigabitEthernet1/1/3
+ switchport access vlan 199
+ shutdown
+!
+interface GigabitEthernet1/1/4
+ switchport access vlan 199
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ mac-address 0090.2b32.2c01
+ ip address 172.16.0.2 255.255.255.0
+ ip helper-address 172.16.1.197
+ standby 10 ip 172.16.0.3
+ standby 10 preempt
+!
+interface Vlan20
+ mac-address 0090.2b32.2c02
+ ip address 172.16.1.66 255.255.255.192
+ ip helper-address 172.16.1.197
+ standby 20 ip 172.16.1.67
+ standby 20 preempt
+!
+interface Vlan30
+ mac-address 0090.2b32.2c03
+ ip address 172.16.1.130 255.255.255.192
+ ip helper-address 172.16.1.197
+ standby 30 ip 172.16.1.131
+ standby 30 priority 110
+ standby 30 preempt
+!
+interface Vlan40
+ mac-address 0090.2b32.2c04
+ ip address 172.16.1.226 255.255.255.224
+ ip helper-address 172.16.1.197
+ standby 40 ip 172.16.1.227
+ standby 40 priority 110
+ standby 40 preempt
+!
+interface Vlan50
+ mac-address 0090.2b32.2c05
+ ip address 172.16.2.2 255.255.255.224
+ standby 50 ip 172.16.2.3
+ standby 50 preempt
+!
+interface Vlan60
+ mac-address 0090.2b32.2c06
+ ip address 172.16.1.2 255.255.255.192
+ ip helper-address 172.16.1.197
+ standby 60 ip 172.16.1.3
+ standby 60 preempt
+!
+interface Vlan99
+ mac-address 0090.2b32.2c07
+ ip address 172.16.1.194 255.255.255.224
+ standby 99 ip 172.16.1.195
+ standby 99 priority 110
+ standby 99 preempt
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+ip access-list standard SSH
+ permit host 172.16.1.196
+ deny any
+ip access-list standard STUDENTS
+ permit 172.16.1.224 0.0.0.31
+ permit 172.16.1.64 0.0.0.63
+ deny any
+ip access-list standard INSTRUCTORS
+ permit 172.16.0.0 0.0.0.255
+ permit 172.16.1.128 0.0.0.63
+ permit 172.16.1.224 0.0.0.31
+ permit 172.16.2.0 0.0.0.15
+ deny any
+ip access-list standard OPERATIONS
+ permit 172.16.1.64 0.0.0.63
+ permit 172.16.1.224 0.0.0.31
+ permit 172.16.2.0 0.0.0.15
+ deny any
+ip access-list standard IT
+ permit 172.16.0.0 0.0.0.255
+ permit 172.16.1.64 0.0.0.63
+ permit 172.16.1.128 0.0.0.63
+ permit 172.16.2.0 0.0.0.15
+ permit 172.16.1.0 0.0.0.63
+ permit 172.16.1.192 0.0.0.31
+ deny any
+ip access-list standard SERVICES
+ permit 172.16.1.64 0.0.0.63
+ permit 172.16.1.128 0.0.0.63
+ permit 172.16.1.224 0.0.0.31
+ deny any
+ip access-list standard GUESTS
+ permit 172.16.1.224 0.0.0.31
+ deny any
+ip access-list extended sl_def_acl
+ deny tcp any any eq telnet
+ deny tcp any any eq www
+ deny tcp any any eq 22
+ permit tcp any any eq 22
+!
+banner motd ^
+***UNAUTHORIZED ACCESS IS PROHIBITED***
+^
+!
+!
+!
+snmp-server community snmpAITCops21 RO
+snmp-server community snmpAITCadmin29 RW
+!
+logging 172.16.1.196
+line con 0
+ password 7 080243404D3A550517594D0302736178
+ login
+!
+line aux 0
+!
+line vty 0 4
+ access-class SSH in
+ exec-timeout 5 0
+ login local
+ transport input ssh
+line vty 5 15
+ access-class SSH in
+ exec-timeout 5 0
+ login local
+ transport input ssh
+!
+!
+!
+ntp server 172.16.1.197
+!
+end
+
