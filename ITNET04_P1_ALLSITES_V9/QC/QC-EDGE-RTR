@@ -1,0 +1,122 @@
+QC-EDGE-RTR#sh run
+Building configuration...
+
+Current configuration : 1620 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname QC-EDGE-RTR
+!
+!
+!
+enable secret 5 $1$mERr$zI/MZFbv/OgeefBaLIXYa0
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+username qcnetadmin secret 5 $1$mERr$Z/ROLaJEfAfFV3yk4CZ3d1
+!
+!
+license udi pid CISCO2911/K9 sn FTX1524794R-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+no ip domain-lookup
+ip domain-name qc.aitc.local
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ ip address 113.100.67.80 255.255.255.0
+ ip nat outside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 192.168.3.97 255.255.255.252
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip nat inside source list QC-NAT-SOURCES interface GigabitEthernet0/0 overload
+ip classless
+ip route 0.0.0.0 0.0.0.0 113.100.67.1 
+ip route 192.168.2.0 255.255.254.0 192.168.3.98 
+!
+ip flow-export version 9
+!
+!
+ip access-list standard QC-NAT-SOURCES
+ permit 192.168.2.0 0.0.1.255
+!
+banner motd ^C
+
+************************************************
+AITC Quezon City Campus
+Authorized Personnel Only
+
+Unauthorized access is prohibited.
+All activities are monitored and logged.
+************************************************
+
+^C
+!
+!
+!
+!
+line con 0
+ exec-timeout 5 0
+ password Con$Qc!Rtr#3
+ logging synchronous
+ login
+!
+line aux 0
+!
+line vty 0 4
+ exec-timeout 5 0
+ login local
+ transport input ssh
+line vty 5 15
+ exec-timeout 5 0
+ login local
+ transport input ssh
+!
+!
+ntp server 192.168.3.37
+!
+end
