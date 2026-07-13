@@ -1,0 +1,123 @@
+QC-FR-SW1#sh run
+Building configuration...
+
+Current configuration : 1966 bytes
+!
+version 15.0
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname QC-FR-SW1
+!
+enable secret 5 $1$mERr$9yMg3zQXZqIS1/pD4/bYR0
+!
+!
+!
+ip ssh version 2
+no ip domain-lookup
+ip domain-name qc.aitc.local
+!
+username qcfradmin secret 5 $1$mERr$gqeduCAH5x/zGWPyrkR2Q1
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+!
+interface FastEthernet0/2
+!
+interface FastEthernet0/3
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+ description Uplink-to-Core
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,40,99,199,999
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+ description Uplink-to-Core
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,40,99,199,999
+ switchport mode trunk
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+banner motd ^C
+**************************************************
+AITC Quezon City Campus
+Authorized Personnel Only
+
+Unauthorized access is prohibited.
+All activities are monitored and logged.
+**************************************************
+^C
+!
+!
+!
+line con 0
+ password QcFR$Line!pL2
+ logging synchronous
+ login
+ exec-timeout 5 0
+!
+line vty 0 4
+ exec-timeout 5 0
+ login local
+ transport input ssh
+line vty 5 15
+ exec-timeout 5 0
+ login local
+ transport input ssh
+!
+!
+!
+ntp server 192.168.3.37
+!
+end
