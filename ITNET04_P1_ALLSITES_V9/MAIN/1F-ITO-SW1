@@ -1,0 +1,245 @@
+1F-ITO-SW1#sh run
+Building configuration...
+
+Current configuration : 5153 bytes
+!
+version 15.0
+service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname 1F-ITO-SW1
+!
+enable secret 5 $1$mERr$xe0kdmdo90CGh0tw4uyHC0
+!
+!
+!
+ip ssh version 2
+no ip domain-lookup
+ip domain-name aitc.local
+!
+username itadmin secret 5 $1$mERr$BStJIl/21m23WxI2xcX870
+!
+ip arp inspection vlan 40,50,99
+!
+ip dhcp snooping vlan 10,40,50,99
+ip dhcp snooping
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 000A.F3C0.32B1
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/2
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 0030.F290.9320
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/3
+ switchport access vlan 199
+ switchport mode access
+ switchport port-security
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/4
+ switchport access vlan 199
+ switchport mode access
+ switchport port-security
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/5
+ switchport access vlan 199
+ switchport mode access
+ switchport port-security
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/6
+ switchport access vlan 199
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/7
+ switchport access vlan 199
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/8
+ switchport access vlan 199
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/9
+ switchport access vlan 199
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/10
+ switchport access vlan 199
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/11
+ switchport access vlan 199
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/12
+ switchport access vlan 199
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/13
+ switchport access vlan 199
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/14
+ switchport access vlan 199
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/15
+ switchport access vlan 199
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/16
+ switchport access vlan 199
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/17
+ switchport access vlan 199
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/18
+ switchport access vlan 199
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/19
+ switchport access vlan 50
+ switchport mode access
+ switchport port-security
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/20
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 20,30,40,60,99
+ ip arp inspection trust
+ ip dhcp snooping trust
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface FastEthernet0/21
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 20,30,40,60,99
+ ip arp inspection trust
+ ip dhcp snooping trust
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface FastEthernet0/22
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/23
+ switchport access vlan 50
+ ip dhcp snooping trust
+ switchport mode access
+ switchport port-security
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/24
+ switchport access vlan 99
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet0/1
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 40,50,99
+ ip arp inspection trust
+ ip dhcp snooping trust
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface GigabitEthernet0/2
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 40,50,99
+ ip arp inspection trust
+ ip dhcp snooping trust
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan99
+ ip address 172.16.1.201 255.255.255.224
+!
+ip default-gateway 172.16.1.195
+!
+banner motd ^C***UNAUTHORIZED ACCESS IS PROHIBITED***^C
+!
+!
+snmp-server community snmpAITCops21 RO
+snmp-server community snmpAITCadmin29 RW
+!
+ip access-list standard SSH
+ permit host 172.16.1.196
+ deny any
+line con 0
+ password 7 0808781B25580B12013A5E247F
+ logging synchronous
+ login
+ exec-timeout 5 0
+!
+line vty 0 4
+ access-class SSH in
+ exec-timeout 5 0
+ logging synchronous
+ login local
+ transport input ssh
+line vty 5 15
+ access-class SSH in
+ exec-timeout 5 0
+ logging synchronous
+ login local
+ transport input ssh
+!
+!
+!
+ntp server 172.16.1.197
+!
+end
