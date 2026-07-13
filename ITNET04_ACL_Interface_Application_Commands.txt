@@ -1,0 +1,82 @@
+ITNET04 S24B Phase 1 - ACL Interface Application Commands For Group 6
+
+[MANILA - CORE-SW1]
+
+int vlan 10
+ip access-group MNL-STUDENTS in
+
+int vlan 20
+ip access-group MNL-INSTRUCTORS in
+
+int vlan 30
+ip access-group MNL-OPERATIONS in
+
+int vlan 40
+ip access-group MNL-ITO in
+
+int vlan 60
+ip access-group MNL-GUESTS in
+
+[MANILA - CORE-SW2]
+
+int vlan 10
+ip access-group MNL-STUDENTS in
+
+int vlan 20
+ip access-group MNL-INSTRUCTORS in
+
+int vlan 30
+ip access-group MNL-OPERATIONS in
+
+int vlan 40
+ip access-group MNL-ITO in
+
+int vlan 60
+ip access-group MNL-GUESTS in
+
+[MANILA - MAIN-EDGE-RTR]
+
+int g0/0
+ip access-group MNL-INTERNET-IN in
+
+int g0/1
+ip access-group MNL-INTERNET-IN in
+
+[ANNEX - ANNEX-CORE-SW1]
+
+int vlan 10
+ip access-group ANNEX-STUDENTS in
+
+int vlan 20
+ip access-group ANNEX-INSTRUCTORS in
+
+int vlan 40
+ip access-group ANNEX-ITO in
+
+[QC - QC-CORE-SW1]
+
+int vlan 10
+ip access-group QC-STUDENTS in
+
+int vlan 20
+ip access-group QC-INSTRUCTORS in
+
+int vlan 30
+ip access-group QC-OPERATIONS in
+
+int vlan 40
+ip access-group QC-ITO in
+
+[QC - QC-CORE-SW2]
+
+int vlan 10
+ip access-group QC-STUDENTS in
+
+int vlan 20
+ip access-group QC-INSTRUCTORS in
+
+int vlan 30
+ip access-group QC-OPERATIONS in
+
+int vlan 40
+ip access-group QC-ITO in
